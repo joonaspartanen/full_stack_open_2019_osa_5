@@ -73,7 +73,11 @@ const App = () => {
       {user !== null &&
         <div>
           <CurrentUser user={user} setUser={setUser} />
-          <AddBlogForm blogs={blogs} setBlogs={setBlogs} setNotification={setNotification} />
+          <AddBlogForm
+            blogs={blogs}
+            setBlogs={setBlogs}
+            setNotification={setNotification}
+          />
           <Blogs blogs={blogs} />
         </div>
       }

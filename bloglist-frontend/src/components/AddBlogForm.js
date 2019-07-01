@@ -5,6 +5,14 @@ const AddBlogForm = ({ blogs, setBlogs, setNotification }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
+  const [visible, setVisible] = useState(false)
+
+  const hideWhenVisible = { display: visible ? 'none' : '' }
+  const showWhenVisible = { display: visible ? '' : 'none' }
+
+  const toggleVisibility = () => {
+    setVisible(!visible)
+  }
 
   const formStyle = {
     marginLeft: .5 + 'em',
@@ -25,7 +33,7 @@ const AddBlogForm = ({ blogs, setBlogs, setNotification }) => {
 
   const addBlog = (event) => {
     event.preventDefault()
-
+    toggleVisibility()
     try {
       const blogObject = {
         title: title,
@@ -57,22 +65,28 @@ const AddBlogForm = ({ blogs, setBlogs, setNotification }) => {
 
   return (
     <>
-      <h2>Add new blog</h2>
-      <form onSubmit={addBlog}>
-        <div>
-          <label htmlFor="title">Title:</label>
-          <input id="title" value={title} onChange={handleTitleChange} style={formStyle} />
-        </div>
-        <div>
-          <label htmlFor="author">Author:</label>
-          <input id="author" value={author} onChange={handleAuthorChange} style={formStyle} />
-        </div>
-        <div>
-          <label htmlFor="url">URL:</label>
-          <input id="url" value={url} onChange={handleUrlChange} style={formStyle} />
-        </div>
-        <button type="submit">Add blog</button>
-      </form>
+      <div style={hideWhenVisible}>
+        <button onClick={toggleVisibility}>Add blog</button>
+      </div>
+      <div style={showWhenVisible}>
+        <h2>Add new blog</h2>
+        <form onSubmit={addBlog}>
+          <div>
+            <label htmlFor="title">Title:</label>
+            <input id="title" value={title} onChange={handleTitleChange} style={formStyle} />
+          </div>
+          <div>
+            <label htmlFor="author">Author:</label>
+            <input id="author" value={author} onChange={handleAuthorChange} style={formStyle} />
+          </div>
+          <div>
+            <label htmlFor="url">URL:</label>
+            <input id="url" value={url} onChange={handleUrlChange} style={formStyle} />
+          </div>
+          <button type="submit">Add blog</button>
+          <button onClick={toggleVisibility} style={{ marginLeft: 10 }}>Cancel</button>
+        </form>
+      </div>
     </>
   )
 }
