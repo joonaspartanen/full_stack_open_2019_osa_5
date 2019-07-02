@@ -77,8 +77,14 @@ const App = () => {
             blogs={blogs}
             setBlogs={setBlogs}
             setNotification={setNotification}
+            user={user}
           />
-          <Blogs blogs={blogs} />
+          <Blogs
+            blogs={blogs.sort((a, b) => b.likes - a.likes)}
+            setBlogs={setBlogs}
+            user={user}
+            setNotification={setNotification}
+          />
         </div>
       }
 

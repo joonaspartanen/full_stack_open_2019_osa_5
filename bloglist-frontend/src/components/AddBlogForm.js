@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
 import blogService from '../services/blogs'
 
-const AddBlogForm = ({ blogs, setBlogs, setNotification }) => {
+const AddBlogForm = ({ blogs, setBlogs, setNotification, user }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
   const [visible, setVisible] = useState(false)
 
-  const hideWhenVisible = { display: visible ? 'none' : '' }
+  const hideWhenVisible = {
+    display: visible ? 'none' : '',
+    marginBottom: 18
+  }
+
   const showWhenVisible = { display: visible ? '' : 'none' }
 
   const toggleVisibility = () => {
@@ -31,9 +35,10 @@ const AddBlogForm = ({ blogs, setBlogs, setNotification }) => {
     setUrl(event.target.value)
   }
 
-  const addBlog = (event) => {
+  const addBlog = async event => {
     event.preventDefault()
     toggleVisibility()
+
     try {
       const blogObject = {
         title: title,
@@ -41,14 +46,11 @@ const AddBlogForm = ({ blogs, setBlogs, setNotification }) => {
         url: url
       }
 
-      blogService
-        .create(blogObject)
-        .then(data => {
-          setBlogs(blogs.concat(data))
-          setTitle('')
-          setAuthor('')
-          setUrl('')
-        })
+      const data = await blogService.create(blogObject)
+      setBlogs(blogs.concat(data))
+      setTitle('')
+      setAuthor('')
+      setUrl('')
 
       setNotification({ message: `The blog ${title} by ${author} was added to the list` })
       setTimeout(() => {
