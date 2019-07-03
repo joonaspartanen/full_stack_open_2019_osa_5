@@ -87,10 +87,10 @@ const Blog = ({ blog, blogs, setBlogs, user, setNotification }) => {
 
   return (
     <div style={blogStyle}>
-      <div onClick={toggleVisibility} style={blogRow}>
+      <div onClick={toggleVisibility} style={blogRow} className='blog-title'>
         <strong>{blog.title} - {blog.author}</strong>
       </div>
-      <div style={showWhenVisible}>
+      <div style={showWhenVisible} className='blog-details'>
         <div style={blogRow}><a href={`//${blog.url}`}> {blog.url}</a></div>
         <div style={blogRow}>{blog.likes} likes<button onClick={updateBlog} style={{ marginLeft: 5 }}>like</button></div>
         {blogAdder()}
