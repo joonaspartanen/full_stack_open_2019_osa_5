@@ -9,7 +9,7 @@ const Login = ({ handleLogin, username, setUsername, password, setPassword }) =>
   }
 
   return (
-    <>
+    <div className='login-form'>
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
@@ -34,7 +34,7 @@ const Login = ({ handleLogin, username, setUsername, password, setPassword }) =>
         </div>
         <button type="submit" style={formStyle}>Login</button>
       </form>
-    </>
+    </div>
   )
 }
 

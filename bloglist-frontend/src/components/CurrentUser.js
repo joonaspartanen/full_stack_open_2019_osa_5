@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const CurrentUser = ({ user, setUser }) => {
 
@@ -18,3 +19,8 @@ const CurrentUser = ({ user, setUser }) => {
 }
 
 export default CurrentUser
+
+CurrentUser.propTypes = {
+  user: PropTypes.object.isRequired,
+  setUser: PropTypes.func.isRequired
+}
