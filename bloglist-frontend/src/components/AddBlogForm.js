@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import blogService from '../services/blogs'
+import { useField } from '../hooks'
 
 const AddBlogForm = ({ blogs, setBlogs, setNotification }) => {
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+
+  const title = useField('text')
+  const author = useField('text')
+  const url = useField('text')
+
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = {
@@ -23,36 +26,24 @@ const AddBlogForm = ({ blogs, setBlogs, setNotification }) => {
     marginBottom: 1 + 'em'
   }
 
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value)
-  }
-
-  const handleAuthorChange = (event) => {
-    setAuthor(event.target.value)
-  }
-
-  const handleUrlChange = (event) => {
-    setUrl(event.target.value)
-  }
-
   const addBlog = async event => {
     event.preventDefault()
     toggleVisibility()
 
     try {
       const blogObject = {
-        title: title,
-        author: author,
-        url: url
+        title: title.value,
+        author: author.value,
+        url: url.value
       }
 
       const data = await blogService.create(blogObject)
       setBlogs(blogs.concat(data))
-      setTitle('')
-      setAuthor('')
-      setUrl('')
+      title.reset()
+      author.reset()
+      url.reset()
 
-      setNotification({ message: `The blog ${title} by ${author} was added to the list` })
+      setNotification({ message: `The blog ${title.value} by ${author.value} was added to the list` })
       setTimeout(() => {
         setNotification({ message: null })
       }, 5000)
@@ -75,15 +66,15 @@ const AddBlogForm = ({ blogs, setBlogs, setNotification }) => {
         <form onSubmit={addBlog}>
           <div>
             <label htmlFor="title">Title:</label>
-            <input id="title" value={title} onChange={handleTitleChange} style={formStyle} />
+            <input {...title} style={formStyle} />
           </div>
           <div>
             <label htmlFor="author">Author:</label>
-            <input id="author" value={author} onChange={handleAuthorChange} style={formStyle} />
+            <input {...author} style={formStyle} />
           </div>
           <div>
             <label htmlFor="url">URL:</label>
-            <input id="url" value={url} onChange={handleUrlChange} style={formStyle} />
+            <input {...url} style={formStyle} />
           </div>
           <button type="submit">Add blog</button>
           <button onClick={toggleVisibility} style={{ marginLeft: 10 }}>Cancel</button>
