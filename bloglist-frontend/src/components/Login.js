@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Login = ({ handleLogin, username, setUsername, password, setPassword }) => {
+const Login = ({ handleLogin, username, password }) => {
 
   const formStyle = {
     marginLeft: .5 + 'em',
@@ -14,21 +14,13 @@ const Login = ({ handleLogin, username, setUsername, password, setPassword }) =>
       <form onSubmit={handleLogin}>
         <div>
           Username
-          <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
+          <input {...username}
             style={formStyle}
           />
         </div>
         <div>
           Password
-          <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
+          <input {...password}
             style={formStyle}
           />
         </div>
@@ -40,11 +32,8 @@ const Login = ({ handleLogin, username, setUsername, password, setPassword }) =>
 
 Login.propTypes = {
   handleLogin: PropTypes.func.isRequired,
-  setUsername: PropTypes.func.isRequired,
-  setPassword: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired
+  username: PropTypes.object.isRequired,
+  password: PropTypes.object.isRequired
 }
-
 
 export default Login

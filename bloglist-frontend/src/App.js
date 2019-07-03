@@ -6,13 +6,17 @@ import Notification from './components/Notification'
 import Login from './components/Login'
 import CurrentUser from './components/CurrentUser'
 import AddBlogForm from './components/AddBlogForm'
+import { useField } from './hooks'
 
 // import './App.css';
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const username = useField('text')
+  const password = useField('password')
+
+  // const [username, setUsername] = useState('')
+  // const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [notification, setNotification] = useState({
     message: null
@@ -36,9 +40,10 @@ const App = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
+
     try {
       const user = await loginService.login({
-        username, password,
+        username: username.value, password: password.value,
       })
 
       window.localStorage.setItem(
@@ -46,8 +51,8 @@ const App = () => {
       )
 
       setUser(user)
-      setUsername('')
-      setPassword('')
+      // setUsername('')
+      // setPassword('')
     } catch (exception) {
       setNotification({ message: 'Wrong credentials', type: 'error' })
       setTimeout(() => {
@@ -65,9 +70,9 @@ const App = () => {
       {user === null && <Login
         handleLogin={handleLogin}
         username={username}
-        setUsername={setUsername}
+        //   setUsername={setUsername}
         password={password}
-        setPassword={setPassword}
+      //    setPassword={setPassword}
       />}
 
       {user !== null &&
