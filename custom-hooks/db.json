@@ -1,0 +1,62 @@
+{
+  "notes": [
+    {
+      "content": "custom-hooks are awesome!",
+      "id": 1
+    },
+    {
+      "content": "best feature ever <3",
+      "id": 2
+    },
+    {
+      "content": "",
+      "id": 3
+    },
+    {
+      "content": "sdsd",
+      "id": 4
+    },
+    {
+      "content": "sdsdsdsd",
+      "id": 5
+    },
+    {
+      "content": "kukkuu",
+      "id": 6
+    },
+    {
+      "content": "En kyllä itekään ymmärrä miksi tämä toimii...",
+      "id": 7
+    },
+    {
+      "content": "Vieläkö toimii",
+      "id": 8
+    },
+    {
+      "content": "Toimii?",
+      "id": 9
+    }
+  ],
+  "persons": [
+    {
+      "name": "mluukkai",
+      "number": "040-5483923",
+      "id": 1
+    },
+    {
+      "name": "Joonas Partanen",
+      "number": "0405067852",
+      "id": 2
+    },
+    {
+      "name": "Nuutti",
+      "number": "0401234567",
+      "id": 3
+    },
+    {
+      "name": "JP",
+      "number": "0405595995",
+      "id": 4
+    }
+  ]
+}
